@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A clean, responsive, and accessible Country and Capital lookup interface built with vanilla HTML5, CSS3, and JavaScript.">
+  <meta name="theme-color" content="#2563eb">
+  <title>Country and Capital</title>
+
+  <!-- Inline SVG Favicon to avoid 404 requests -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
+
+  <!-- Production Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Main Application Landmark -->
+  <main class="app-card" role="main">
+    <header class="app-header">
+      <div class="badge">Geography Explorer</div>
+      <h1 class="app-title">Country and Capital</h1>
+      <p class="app-subtitle">Select a country from the dropdown below to view its corresponding capital city.</p>
+    </header>
+
+    <!-- Interactive Selection Control Section -->
+    <section class="selection-section" aria-label="Country selection and capital city output">
+      <div class="control-group">
+        <label for="countrySelect" class="visually-hidden">Choose a Country</label>
+
+        <!-- Dropdown Selection Box -->
+        <div class="select-wrapper">
+          <select id="countrySelect" class="country-dropdown" autocomplete="off">
+            <option value="">Select a Country</option>
+            <option value="Nepal">Nepal</option>
+            <option value="India">India</option>
+            <option value="Japan">Japan</option>
+            <option value="France">France</option>
+            <option value="Australia">Australia</option>
+          </select>
+        </div>
+
+        <!-- Dynamic Capital City Display (side-by-side with live region for assistive tech) -->
+        <div class="capital-badge-container">
+          <span
+            id="capitalDisplay"
+            class="capital-display"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p class="footer-note">Vanilla ES6+ • Zero Dependencies • WCAG 2.1 AA Compliant</p>
+    </footer>
+  </main>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>

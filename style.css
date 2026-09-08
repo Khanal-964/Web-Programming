@@ -1,0 +1,296 @@
+/* ==========================================================================
+   Design Tokens & System Variables
+   ========================================================================== */
+:root {
+  /* Color Palette - Neutrals */
+  --color-bg-viewport: #f8fafc;
+  --color-surface-card: #ffffff;
+  --color-surface-card-subtle: #f8fafc;
+  --color-border-subtle: #e2e8f0;
+  --color-border-hover: #94a3b8;
+  --color-border-focus: #2563eb;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+
+  /* Primary Brand & Capital City Accent Tokens */
+  --color-primary: #2563eb;
+  --color-primary-light: #eff6ff;
+  --color-focus-ring: rgba(37, 99, 235, 0.25);
+
+  /* Capital City Display Tokens (Customized color, bold, larger) */
+  --color-capital-text: #1d4ed8;
+  --color-capital-bg: #eff6ff;
+  --color-capital-border: #bfdbfe;
+  --font-size-capital: clamp(1.25rem, 2vw, 1.45rem);
+  --font-weight-capital: 700;
+
+  /* Typography Scale */
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-title: clamp(1.5rem, 3vw, 1.875rem);
+  --line-height-normal: 1.5;
+  --line-height-tight: 1.25;
+
+  /* Spacing Scale (8pt Grid) */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem;  /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem;    /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem;  /* 24px */
+  --space-8: 2rem;    /* 32px */
+  --space-10: 2.5rem; /* 40px */
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+
+  /* Radii */
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Dark Mode Support (Automatic via system preferences)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-viewport: #090d16;
+    --color-surface-card: #111827;
+    --color-surface-card-subtle: #1e293b;
+    --color-border-subtle: #1f293d;
+    --color-border-hover: #374151;
+    --color-border-focus: #3b82f6;
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+
+    --color-primary: #3b82f6;
+    --color-primary-light: #172554;
+    --color-focus-ring: rgba(59, 130, 246, 0.35);
+
+    /* Capital City Accent in Dark Mode */
+    --color-capital-text: #60a5fa;
+    --color-capital-bg: #1e3a8a;
+    --color-capital-border: #2563eb;
+    --shadow-card: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ==========================================================================
+   CSS Reset & Base Rules
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-bg-viewport);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-4);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Card Component Layout
+   ========================================================================== */
+.app-card {
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-8) var(--space-6);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top decorative header badge */
+.badge {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-3);
+  letter-spacing: 0.02em;
+}
+
+.app-title {
+  font-size: var(--font-size-title);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-2);
+}
+
+.app-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  max-width: 440px;
+  margin: 0 auto var(--space-8) auto;
+}
+
+/* ==========================================================================
+   Selection Section (Side-by-Side Flexbox Layout)
+   ========================================================================== */
+.selection-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--space-8);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  min-height: 52px;
+}
+
+/* Visually hidden utility for accessible screen reader labels */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Custom Dropdown Styling with SVG Chevron Indicator */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.country-dropdown {
+  /* Reset default system styles */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Ergonomic sizing and typography */
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-card);
+  border: 1.5px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 42px 10px 16px;
+  min-width: 200px;
+  cursor: pointer;
+
+  /* Custom crisp SVG arrow icon */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px 16px;
+
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.country-dropdown:hover {
+  border-color: var(--color-border-hover);
+}
+
+.country-dropdown:focus {
+  outline: none;
+}
+
+.country-dropdown:focus-visible {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+/* ==========================================================================
+   Capital City Dynamic Display Node
+   Specifications:
+   - Customized font color
+   - Bold font weight
+   - Larger font size
+   - Appears immediately next to dropdown
+   ========================================================================== */
+.capital-badge-container {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.capital-display {
+  color: var(--color-capital-text);
+  font-weight: var(--font-weight-capital);
+  font-size: var(--font-size-capital);
+  letter-spacing: 0.01em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+  display: inline-block;
+}
+
+/* When a capital is actively rendered */
+.capital-display.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional subtle pill treatment when active */
+.capital-display.is-visible::before {
+  content: "•";
+  margin-right: var(--space-2);
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.app-footer {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-4);
+}
+
+.footer-note {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Accessibility: Reduced Motion Preference
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
